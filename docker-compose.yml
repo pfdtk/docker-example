@@ -1,0 +1,42 @@
+version: '3'
+services:
+    nginx:
+        image: "${NAME_SPACE}/nginx:v1.0"
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+        networks:
+            - nginx
+        depends_on:
+            - php
+    php:
+        image: "${NAME_SPACE}/php:v1.0"
+        build:
+            context: ./php
+            dockerfile: Dockerfile
+        networks:
+            - nginx
+            - mysql
+        depends_on:
+            - mysql
+    mysql:
+        image: "${NAME_SPACE}/mysql:v1.0"
+        build:
+            context: ./mysql
+            dockerfile: Dockerfile
+        volumes:
+            - mysql_data:/var/lib/mysql
+        environment:
+            TZ: 'Asia/Shanghai'
+            MYSQL_ROOT_PASSWORD: 111111
+        command: ['mysqld', '--character-set-server=utf8']
+        networks:
+            - mysql
+volumes:
+    mysql_data:
+
+networks:
+    nginx:
+    mysql:
