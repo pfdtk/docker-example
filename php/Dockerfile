@@ -1,2 +1,1 @@
-FROM php:5.6.32-fpm-alpine
-COPY ./index.php /usr/share/nginx/html/
+FROM php:7.3-fpm

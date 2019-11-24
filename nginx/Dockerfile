@@ -1,4 +1,1 @@
-FROM nginx:1.11
-ENV TZ=Asia/Shanghai
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-COPY ./index.php /usr/share/nginx/html/
+FROM nginx:1.17.6

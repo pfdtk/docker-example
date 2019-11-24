@@ -5,6 +5,9 @@ services:
         build:
             context: ./nginx
             dockerfile: Dockerfile
+        volumes:
+            - "$PWD/nginx/conf.d:/etc/nginx/conf.d"
+            - "/Users/zzz/data/project:/var/www/html"
         ports:
             - "80:80"
         networks:
@@ -16,6 +19,8 @@ services:
         build:
             context: ./php
             dockerfile: Dockerfile
+        volumes:
+            - "/Users/zzz/data/project:/var/www/html"
         networks:
             - nginx
             - mysql
