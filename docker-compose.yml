@@ -22,9 +22,22 @@ services:
         volumes:
             - "/Users/zzz/data/project:/var/www/html"
         networks:
+            - php
             - nginx
             - mysql
         depends_on:
+            - mysql
+    phpcli:
+        image: "${NAME_SPACE}/phpcli:v1.0"
+        build:
+            context: ./phpcli
+            dockerfile: Dockerfile
+        volumes:
+            - "/Users/zzz/data/project:/var/www/html"
+        networks:
+            - phpcli
+            - php
+            - nginx
             - mysql
     mysql:
         image: "${NAME_SPACE}/mysql:v1.0"
@@ -43,5 +56,7 @@ volumes:
     mysql_data:
 
 networks:
+    php:
+    phpcli:
     nginx:
     mysql:
