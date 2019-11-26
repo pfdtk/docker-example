@@ -15,6 +15,13 @@ services:
         depends_on:
             - php
             - php6
+    redis:
+        image: "${NAME_SPACE}/redis:v1.0"
+        build:
+            context: ./redis
+            dockerfile: Dockerfile
+        networks:
+            - lnmp
     php:
         image: "${NAME_SPACE}/php:v1.0"
         build:
@@ -26,6 +33,7 @@ services:
             - lnmp
         depends_on:
             - mysql
+            - redis
     php6:
         image: "${NAME_SPACE}/php6:v1.0"
         build:
@@ -37,6 +45,7 @@ services:
             - lnmp
         depends_on:
             - mysql
+            - redis
     phpcli:
         image: "${NAME_SPACE}/phpcli:v1.0"
         build:
@@ -44,6 +53,8 @@ services:
             dockerfile: Dockerfile
         networks:
             - lnmp
+        depends_on:
+            - redis
     phpcli6:
         image: "${NAME_SPACE}/phpcli6:v1.0"
         build:
@@ -51,6 +62,8 @@ services:
             dockerfile: Dockerfile
         networks:
             - lnmp
+        depends_on:
+            - redis
     mysql:
         image: "${NAME_SPACE}/mysql:v1.0"
         build:
