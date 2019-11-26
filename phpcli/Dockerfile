@@ -30,6 +30,13 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN apt update && apt-get -y install openssh-server && \
+    mkdir /var/run/sshd && \
+    mkdir -p ~/.ssh
+
+# use local ssh key
+COPY ~/.ssh/* ~/.ssh/
+
 RUN docker-php-ext-configure gd \
     --with-freetype-dir=/usr/include/ \
     --with-png-dir=/usr/include/ \
