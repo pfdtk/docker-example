@@ -1,7 +1,6 @@
 FROM php:5.6-fpm
 
-
-RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian buster main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian buster-updates main" > /etc/apt/sources.list 
+#RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian buster main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian buster-updates main" > /etc/apt/sources.list 
 
 
 RUN apt-get update \
@@ -34,12 +33,12 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN apt update && apt-get -y install openssh-server && \
-    mkdir /var/run/sshd && \
-    mkdir -p ~/.ssh \
-    && echo 'root:111111' | chpasswd \
-    && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
-    && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+#RUN apt update && apt-get -y install openssh-server && \
+#    mkdir /var/run/sshd && \
+#    mkdir -p ~/.ssh \
+#    && echo 'root:111111' | chpasswd \
+#    && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+#    && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 RUN docker-php-ext-configure gd \
     --with-freetype-dir=/usr/include/ \

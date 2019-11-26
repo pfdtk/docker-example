@@ -1,7 +1,6 @@
 FROM php:5.6-cli
 
-
-RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian buster main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian buster-updates main" > /etc/apt/sources.list 
+#RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian buster main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian buster-updates main" > /etc/apt/sources.list 
 
 
 RUN apt-get update \
