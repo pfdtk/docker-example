@@ -1,5 +1,8 @@
 FROM php:7.3-cli
 
+RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian buster main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian buster-updates main" > /etc/apt/sources.list 
+
+
 RUN apt-get update \
     && apt-get -y install \
         apt-utils \
@@ -32,10 +35,10 @@ RUN apt-get update \
 
 RUN apt update && apt-get -y install openssh-server && \
     mkdir /var/run/sshd && \
-    mkdir -p ~/.ssh
-
-# use local ssh key
-COPY ~/.ssh/* ~/.ssh/
+    mkdir -p ~/.ssh \
+    && echo 'root:111111' | chpasswd \
+    && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 RUN docker-php-ext-configure gd \
     --with-freetype-dir=/usr/include/ \
@@ -53,7 +56,6 @@ RUN docker-php-ext-configure gd \
         iconv \
         intl \
         mbstring \
-        opcache \
         pdo_mysql \
         pdo_pgsql \
         imap
@@ -64,3 +66,6 @@ RUN printf "\npecl" | pecl install \
     && docker-php-ext-enable \
         imagick \
         mongodb
+
+# use with build.args in docker-compos.yml
+# ARG SSH_KEY_PATH
