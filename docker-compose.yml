@@ -46,6 +46,15 @@ services:
             - "/Users/zzz/data/project:/var/www/html"
         networks:
             - lnmp
+    phpcli6:
+        image: "${NAME_SPACE}/phpcli6:v1.0"
+        build:
+            context: ./phpcli6
+            dockerfile: Dockerfile
+        volumes:
+            - "/Users/zzz/data/project:/var/www/html"
+        networks:
+            - lnmp
     mysql:
         image: "${NAME_SPACE}/mysql:v1.0"
         build:
