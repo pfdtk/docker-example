@@ -8,7 +8,7 @@ services:
             dockerfile: Dockerfile
         volumes:
             - "$PWD/nginx/conf.d:/etc/nginx/conf.d"
-            - "${PROJECT_PATH}:/var/www/html"
+            - "${PROJECT_PATH}:/var/www/html:cached"
         ports:
             - "80:80"
         networks:
@@ -34,7 +34,7 @@ services:
             context: ./php
             dockerfile: Dockerfile
         volumes:
-            - "${PROJECT_PATH}:/var/www/html"
+            - "${PROJECT_PATH}:/var/www/html:cached"
         networks:
             - lnmp
         depends_on:
@@ -47,7 +47,7 @@ services:
             context: ./php6
             dockerfile: Dockerfile
         volumes:
-            - "${PROJECT_PATH}:/var/www/html"
+            - "${PROJECT_PATH}:/var/www/html:cached"
         networks:
             - lnmp
         depends_on:
