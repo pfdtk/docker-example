@@ -2,6 +2,7 @@ version: '3.7'
 services:
     nginx:
         image: "${NAME_SPACE}/nginx:v1.0"
+        restart: always
         build:
             context: ./nginx
             dockerfile: Dockerfile
@@ -11,12 +12,16 @@ services:
         ports:
             - "80:80"
         networks:
-            - lnmp
+            lnmp:
+                aliases:
+                    - ${SERVICE_HOST}
+                    - ${VIDEO_HOST}
         depends_on:
             - php
             - php6
     redis:
         image: "${NAME_SPACE}/redis:v1.0"
+        restart: always
         build:
             context: ./redis
             dockerfile: Dockerfile
@@ -24,6 +29,7 @@ services:
             - lnmp
     php:
         image: "${NAME_SPACE}/php:v1.0"
+        restart: always
         build:
             context: ./php
             dockerfile: Dockerfile
@@ -34,10 +40,9 @@ services:
         depends_on:
             - mysql
             - redis
-        extra_hosts:
-            - "${SERVICE_HOST}:php6"
     php6:
         image: "${NAME_SPACE}/php6:v1.0"
+        restart: always
         build:
             context: ./php6
             dockerfile: Dockerfile
@@ -50,6 +55,7 @@ services:
             - redis
     phpcli:
         image: "${NAME_SPACE}/phpcli:v1.0"
+        restart: always
         build:
             context: ./phpcli
             dockerfile: Dockerfile
@@ -59,6 +65,7 @@ services:
             - redis
     phpcli6:
         image: "${NAME_SPACE}/phpcli6:v1.0"
+        restart: always
         build:
             context: ./phpcli6
             dockerfile: Dockerfile
@@ -68,6 +75,7 @@ services:
             - redis
     mysql:
         image: "${NAME_SPACE}/mysql:v1.0"
+        restart: always
         build:
             context: ./mysql
             dockerfile: Dockerfile
