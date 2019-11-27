@@ -69,3 +69,9 @@ RUN printf "\npecl" | pecl install \
 
 # use with build.args in docker-compos.yml
 # ARG SSH_KEY_PATH
+
+RUN docker-php-ext-configure mysql && \
+    docker-php-ext-configure mysqli && \
+    docker-php-ext-install \
+        mysql \
+        mysqli
