@@ -34,6 +34,8 @@ services:
         depends_on:
             - mysql
             - redis
+        extra_hosts:
+            - "${SERVICE_HOST}:php6"
     php6:
         image: "${NAME_SPACE}/php6:v1.0"
         build:
