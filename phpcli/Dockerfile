@@ -69,3 +69,7 @@ RUN printf "\npecl" | pecl install \
 
 # use with build.args in docker-compos.yml
 # ARG SSH_KEY_PATH
+
+RUN printf "\npecl" | pecl install redis \
+    && docker-php-ext-enable \
+        redis

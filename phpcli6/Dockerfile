@@ -75,3 +75,7 @@ RUN docker-php-ext-configure mysql && \
     docker-php-ext-install \
         mysql \
         mysqli
+
+RUN printf "\npecl" | pecl install redis-3.1.0 \
+    && docker-php-ext-enable \
+        redis
