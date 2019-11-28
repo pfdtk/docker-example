@@ -73,3 +73,10 @@ RUN printf "\npecl" | pecl install \
 RUN printf "\npecl" | pecl install redis \
     && docker-php-ext-enable \
         redis
+
+RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
+    python3 get-pip.py --user;
+
+ENV PATH="~/.local/bin:$PATH"
+
+RUN /root/.local/bin/pip3 install awscli --upgrade --user
