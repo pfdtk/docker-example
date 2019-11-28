@@ -7,7 +7,7 @@ services:
             context: ./nginx
             dockerfile: Dockerfile
         volumes:
-            - "$PWD/nginx/conf.d:/etc/nginx/conf.d"
+            - "$PWD/nginx/conf.d:/etc/nginx/conf.d:cached"
             - "${PROJECT_PATH}:/var/www/html:cached"
         ports:
             - "80:80"
@@ -26,7 +26,9 @@ services:
             context: ./redis
             dockerfile: Dockerfile
         networks:
-            - lnmp
+            lnmp:
+                aliases:
+                    - redis
     php:
         image: "${NAME_SPACE}/php:v1.0"
         restart: always
@@ -35,6 +37,7 @@ services:
             dockerfile: Dockerfile
         volumes:
             - "${PROJECT_PATH}:/var/www/html:cached"
+            - "./php/www.conf:/usr/local/etc/php-fpm.d/www.conf:cached"
         networks:
             - lnmp
         depends_on:
@@ -48,6 +51,7 @@ services:
             dockerfile: Dockerfile
         volumes:
             - "${PROJECT_PATH}:/var/www/html:cached"
+            - "./php6/www.conf:/usr/local/etc/php-fpm.d/www.conf:cached"
         networks:
             - lnmp
         depends_on:
@@ -80,7 +84,7 @@ services:
             context: ./mysql
             dockerfile: Dockerfile
         volumes:
-            - mysql_data:/var/lib/mysql
+            - "mysql_data:/var/lib/mysql:cached"
         environment:
             TZ: 'Asia/Shanghai'
             MYSQL_ROOT_PASSWORD: 111111
