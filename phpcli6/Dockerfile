@@ -86,3 +86,9 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
 ENV PATH="~/.local/bin:$PATH"
 
 RUN /root/.local/bin/pip3 install awscli --upgrade --user
+
+RUN apt-get update && \
+    apt-get install libldap2-dev -y && \
+    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
+    docker-php-ext-install \
+        ldap
