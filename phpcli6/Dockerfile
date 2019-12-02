@@ -92,3 +92,8 @@ RUN apt-get update && \
     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
     docker-php-ext-install \
         ldap
+
+RUN printf "\npecl" | pecl install \
+    mongo \
+    && docker-php-ext-enable \
+        mongo
