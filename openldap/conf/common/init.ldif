@@ -4,10 +4,10 @@ objectClass: top
 o: Des
 dc: common
 
-dn: ou=admin,dc=common,dc=com
+dn: ou=general,dc=common,dc=com
 objectClass: organizationalUnit
-ou: admin
-description: Container for admin entries
+ou: general
+description: Container for general entries
 
 dn: ou=open,dc=common,dc=com
 objectClass: organizationalUnit
@@ -24,7 +24,7 @@ uid: gateway
 objectClass: inetOrgPerson
 objectClass: top
 sn: Gateway
-cn: Gateway admin
+cn: Gateway
 userPassword: 111111
 
 dn: ou=policies,dc=common,dc=com
@@ -42,3 +42,29 @@ pwdLockout: TRUE
 pwdLockoutDuration: 0
 pwdMaxFailure: 500
 sn: Policies
+
+dn: uid=Michael,ou=general,dc=common,dc=com
+uid: Michael
+objectClass: inetOrgPerson
+objectClass: top
+mail: Michael@common.com
+userPassword: 111111
+sn: Michael common
+cn: Michael common
+displayName: Michaes
+mobile: 123123
+departmentNumber: 222
+
+dn: cn=common,ou=groups,dc=common,dc=com
+cn: common
+ou: groups
+objectClass: groupOfNames
+objectClass: top
+member: uid=Michael,ou=general,dc=common,dc=com
+
+dn: cn=gateway,ou=groups,dc=common,dc=com
+cn: gateway
+ou: groups
+objectClass: groupOfNames
+objectClass: top
+member: uid=gateway,ou=open,dc=common,dc=com
