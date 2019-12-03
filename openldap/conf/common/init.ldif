@@ -1,0 +1,44 @@
+dn: dc=common,dc=com
+objectClass: domain
+objectClass: top
+o: Des
+dc: common
+
+dn: ou=admin,dc=common,dc=com
+objectClass: organizationalUnit
+ou: admin
+description: Container for admin entries
+
+dn: ou=open,dc=common,dc=com
+objectClass: organizationalUnit
+ou: open
+description: Container for open entries
+
+dn: ou=groups,dc=common,dc=com
+objectClass: organizationalUnit
+ou: groups
+description: Container for group entries
+
+dn: uid=gateway,ou=open,dc=common,dc=com
+uid: gateway
+objectClass: inetOrgPerson
+objectClass: top
+sn: Gateway
+cn: Gateway admin
+userPassword: 111111
+
+dn: ou=policies,dc=common,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: policies
+
+dn: cn=default,ou=policies,dc=common,dc=com
+cn: default
+objectClass: pwdPolicy
+objectClass: person
+objectClass: top
+pwdAttribute: userPassword
+pwdLockout: TRUE
+pwdLockoutDuration: 0
+pwdMaxFailure: 500
+sn: Policies

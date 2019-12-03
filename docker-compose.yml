@@ -77,6 +77,17 @@ services:
             - lnmp
         depends_on:
             - redis
+    openldap:
+        image: "${NAME_SPACE}/openldap:v1.0"
+        build:
+            context: ./openldap
+            dockerfile: Dockerfile
+            args:
+                CONF_PATH: "${CONF_PATH}"
+                LDAP_USER: "${LDAP_USER}"
+                LDAP_PASS: "${LDAP_PASS}"
+        networks:
+            - lnmp
     mysql:
         image: "${NAME_SPACE}/mysql:v1.0"
         restart: always
@@ -87,7 +98,7 @@ services:
             - "mysql_data:/var/lib/mysql:cached"
         environment:
             TZ: 'Asia/Shanghai'
-            MYSQL_ROOT_PASSWORD: 111111
+            MYSQL_ROOT_PASSWORD: ${MYSQL_PASS}
         command: ['mysqld', '--character-set-server=utf8']
         networks:
             - lnmp
