@@ -99,3 +99,8 @@ RUN printf "\npecl" | pecl install \
     mongo \
     && docker-php-ext-enable \
         mongo
+
+RUN printf "\npecl" | pecl install \
+    igbinary-2.0.5 \
+    && docker-php-ext-enable \
+        igbinary

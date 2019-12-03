@@ -16,6 +16,7 @@ services:
                 aliases:
                     - ${SERVICE_HOST}
                     - ${VIDEO_HOST}
+                    - ${ACCOUNT_HOST}
         depends_on:
             - php
             - php6
