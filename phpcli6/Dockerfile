@@ -102,3 +102,6 @@ RUN printf "\npecl" | pecl install \
     igbinary-2.0.5 \
     && docker-php-ext-enable \
         igbinary
+
+
+COPY php.ini $PHP_INI_DIR
