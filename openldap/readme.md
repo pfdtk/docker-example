@@ -1,0 +1,1 @@
+/usr/local/openldap/bin/ldapadd -x -D "cn=admin,dc=common,dc=com" -w 111111 -f init.ldif

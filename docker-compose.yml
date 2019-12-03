@@ -88,6 +88,10 @@ services:
                 LDAP_PASS: "${LDAP_PASS}"
         networks:
             - lnmp
+        volumes:
+            - "${PROJECT_PATH}/datastore/openldap:/var/openldap-data:cached"
+        ports:
+            - "389:389"
     mysql:
         image: "${NAME_SPACE}/mysql:v1.0"
         restart: always

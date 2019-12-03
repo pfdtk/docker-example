@@ -16,13 +16,13 @@ RUN cd ~ && wget ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2
 
 
 # set config
-COPY ./${CONF_PATH}/slapd.conf /usr/local/openldap/etc/openldap/slapd.conf
-COPY ./${CONF_PATH}/ldap.conf /usr/local/openldap/etc/openldap/ldap.conf
-COPY ./${CONF_PATH}/init.ldif ~/init.ldif
-
-RUN mkdir /var/openldap-data && /usr/local/openldap/libexec/slapd -h "ldap:///"
+COPY conf/${CONF_PATH}/slapd.conf /usr/local/openldap/etc/openldap/slapd.conf
+COPY conf/${CONF_PATH}/ldap.conf /usr/local/openldap/etc/openldap/ldap.conf
+COPY conf/${CONF_PATH}/init.ldif /root/init.ldif
 
 ARG LDAP_USER
 ARG LDAP_PASS
 
-RUN /usr/local/openldap/bin/ldapadd -x -D "${LDAP_USER}" -w ${LDAP_PASS} -f init.ldif
+RUN mkdir /var/openldap-data
+
+CMD ["/usr/local/openldap/libexec/slapd", "-d", "256", "-h", "ldap:///"]
