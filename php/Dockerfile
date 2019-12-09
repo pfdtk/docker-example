@@ -84,3 +84,5 @@ RUN /root/.local/bin/pip3 install awscli --upgrade --user
 RUN curl -O https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz && \
     tar xf ffmpeg-release-amd64-static.tar.xz && \
     mv ffmpeg-4.2.1-amd64-static /usr/local/ffmpeg
+
+COPY php.ini $PHP_INI_DIR
