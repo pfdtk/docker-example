@@ -104,3 +104,7 @@ RUN printf "\npecl" | pecl install \
     igbinary-2.0.5 \
     && docker-php-ext-enable \
         igbinary
+
+RUN curl -O https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz && \
+    tar xf ffmpeg-release-amd64-static.tar.xz && \
+    mv ffmpeg-4.2.1-amd64-static /usr/local/ffmpeg

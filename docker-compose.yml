@@ -80,6 +80,7 @@ services:
             - redis
     openldap:
         image: "${NAME_SPACE}/openldap:v1.0"
+        restart: always
         build:
             context: ./openldap
             dockerfile: Dockerfile
