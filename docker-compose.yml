@@ -106,6 +106,8 @@ services:
             TZ: 'Asia/Shanghai'
             MYSQL_ROOT_PASSWORD: ${MYSQL_PASS}
         command: ['mysqld', '--character-set-server=utf8']
+        ports:
+            - "3306:3306"
         networks:
             - lnmp
 volumes:
