@@ -1,3 +1,4 @@
 nginx/conf.d/vhosts/*
 .env
 openldap/conf/mvc
+.idea/
