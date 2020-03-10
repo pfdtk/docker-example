@@ -118,6 +118,10 @@ services:
             dockerfile: Dockerfile
         volumes:
             - "mongo_data:/data/db:cached"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+        command: ['mongod', '--auth']
         ports:
             - "27017:27017"
         networks:
