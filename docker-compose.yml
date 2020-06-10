@@ -30,6 +30,8 @@ services:
             lnmp:
                 aliases:
                     - redis
+        ports:
+            - "6379:6379"
     php:
         image: "${NAME_SPACE}/php:v1.0"
         restart: always
