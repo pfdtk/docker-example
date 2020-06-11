@@ -85,4 +85,7 @@ RUN curl -O https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-stati
     tar xf ffmpeg-release-amd64-static.tar.xz && \
     mv ffmpeg-4.2.1-amd64-static /usr/local/ffmpeg
 
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
 COPY php.ini $PHP_INI_DIR
