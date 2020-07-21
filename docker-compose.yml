@@ -112,6 +112,22 @@ services:
             - "3306:3306"
         networks:
             - lnmp
+    postgres:
+        image: "${NAME_SPACE}/postgres:v1.0"
+        restart: always
+        build:
+            context: ./postgresql
+            dockerfile: Dockerfile
+        volumes:
+            - "postgres_data:/var/lib/postgresql/data:cached"
+        environment:
+            POSTGRES_PASSWORD: ${POSTGRES_PASS}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_DB: "postgres"
+        ports:
+            - "5432:5432"
+        networks:
+            - lnmp
     mongo:
         image: "${NAME_SPACE}/mongo:v1.0"
         restart: always
@@ -131,6 +147,7 @@ services:
 volumes:
     mysql_data:
     mongo_data:
+    postgres_data:
 
 networks:
     lnmp:
