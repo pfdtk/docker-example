@@ -81,18 +81,16 @@ ENV PATH="~/.local/bin:$PATH"
 
 RUN /root/.local/bin/pip3 install awscli --upgrade --user
 
-RUN curl -O https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz && \
-    tar xf ffmpeg-release-amd64-static.tar.xz && \
-    mv ffmpeg-4.2.1-amd64-static /usr/local/ffmpeg
-
+RUN apt-get -y install ffmpeg
 
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
-
-COPY php.ini $PHP_INI_DIR
 
 RUN apt-get install -y xfonts-75dpi xfonts-base
 
 COPY pkg/wkhtmltox_0.12.6-1.buster_amd64.deb /tmp/wkhtmltox_0.12.6-1.buster_amd64.deb
 
 RUN dpkg -i /tmp/wkhtmltox_0.12.6-1.buster_amd64.deb
+
+
+COPY php.ini $PHP_INI_DIR

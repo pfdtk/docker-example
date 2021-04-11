@@ -103,9 +103,7 @@ RUN printf "\npecl" | pecl install \
     && docker-php-ext-enable \
         igbinary
 
-RUN curl -O https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz && \
-    tar xf ffmpeg-release-amd64-static.tar.xz && \
-    mv ffmpeg-4.4-amd64-static /usr/local/ffmpeg
+RUN apt-get -y install ffmpeg
 
 RUN pecl install xdebug-2.5.5 \
     && docker-php-ext-enable xdebug
