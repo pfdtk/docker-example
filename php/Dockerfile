@@ -1,6 +1,6 @@
 FROM php:7.3-fpm
 
-RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian buster main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian buster-updates main" > /etc/apt/sources.list 
+#RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian buster main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian buster-updates main" > /etc/apt/sources.list 
 
 
 RUN apt-get update \
@@ -81,9 +81,13 @@ ENV PATH="~/.local/bin:$PATH"
 
 RUN /root/.local/bin/pip3 install awscli --upgrade --user
 
-RUN apt-get -y install ffmpeg
-
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
+
+# RUN apt-get -y install ffmpeg
+RUN curl -O https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
+
+RUN tar xf ffmpeg-release-amd64-static.tar.xz && \
+    mv ffmpeg-4.4-amd64-static /usr/local/ffmpeg
 
 COPY php.ini $PHP_INI_DIR
