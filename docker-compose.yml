@@ -10,7 +10,7 @@ services:
             - "$PWD/nginx/conf.d:/etc/nginx/conf.d:cached"
             - "${PROJECT_PATH}:/var/www/html:cached"
         ports:
-            - "8081:80"
+            - "80:80"
         networks:
             lnmp:
                 aliases:
@@ -157,6 +157,15 @@ services:
         command: ['mongod', '--auth']
         ports:
             - "27017:27017"
+        networks:
+            - lnmp
+    prometheus:
+        image: "${NAME_SPACE}/prometheus:v1.0"
+        build:
+            context: ./prometheus
+            dockerfile: Dockerfile
+        ports:
+            - "9090:9090"
         networks:
             - lnmp
 volumes:
