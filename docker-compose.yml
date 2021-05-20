@@ -17,6 +17,8 @@ services:
                     - ${SERVICE_HOST}
                     - ${VIDEO_HOST}
                     - ${ACCOUNT_HOST}
+                    - ${SSS_API_HOST}
+                    - ${SSS_HOST}
         depends_on:
             - php
             - php6
@@ -62,6 +64,20 @@ services:
         depends_on:
             - mysql
             - redis
+    php74:
+        image: "${NAME_SPACE}/php74:v1.0"
+        restart: always
+        build:
+            context: ./php74
+            dockerfile: Dockerfile
+        volumes:
+            - "${PROJECT_PATH}:/var/www/html:cached"
+            - "./php74/www.conf:/usr/local/etc/php-fpm.d/www.conf:cached"
+            - "~/.aws:/root/.aws:cached"
+        networks:
+            - lnmp
+        depends_on:
+            - redis
     phpcli:
         image: "${NAME_SPACE}/phpcli:v1.0"
         build:
@@ -75,6 +91,15 @@ services:
         image: "${NAME_SPACE}/phpcli6:v1.0"
         build:
             context: ./phpcli6
+            dockerfile: Dockerfile
+        networks:
+            - lnmp
+        depends_on:
+            - redis
+    phpcli74:
+        image: "${NAME_SPACE}/phpcli74:v1.0"
+        build:
+            context: ./phpcli74
             dockerfile: Dockerfile
         networks:
             - lnmp
@@ -129,7 +154,6 @@ services:
             - lnmp
     postgres:
         image: "${NAME_SPACE}/postgres:v1.0"
-        restart: always
         build:
             context: ./postgresql
             dockerfile: Dockerfile
@@ -145,7 +169,6 @@ services:
             - lnmp
     mongo:
         image: "${NAME_SPACE}/mongo:v1.0"
-        restart: always
         build:
             context: ./mongo
             dockerfile: Dockerfile
