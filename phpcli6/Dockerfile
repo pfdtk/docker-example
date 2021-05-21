@@ -62,9 +62,12 @@ RUN docker-php-ext-configure gd \
 
 RUN printf "\npecl" | pecl install \
     imagick \
-    mongodb \
     && docker-php-ext-enable \
-        imagick \
+        imagick
+
+RUN printf "\npecl" | pecl install \
+    mongodb-1.6.0 \
+    && docker-php-ext-enable \
         mongodb
 
 # use with build.args in docker-compos.yml
@@ -80,7 +83,7 @@ RUN printf "\npecl" | pecl install redis-3.1.0 \
     && docker-php-ext-enable \
         redis
 
-RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
+RUN curl -O https://bootstrap.pypa.io/pip/3.5/get-pip.py && \
     python3 get-pip.py --user;
 
 ENV PATH="~/.local/bin:$PATH"
@@ -103,9 +106,12 @@ RUN printf "\npecl" | pecl install \
     && docker-php-ext-enable \
         igbinary
 
+RUN curl -O https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
+
+RUN tar xf ffmpeg-release-amd64-static.tar.xz && \
+    mv ffmpeg-4.4-amd64-static /usr/local/ffmpeg
+
+RUN pecl install xdebug-2.5.5 \
+    && docker-php-ext-enable xdebug
 
 COPY php.ini $PHP_INI_DIR
-
-RUN curl -O https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz && \
-    tar xf ffmpeg-release-amd64-static.tar.xz && \
-    mv ffmpeg-4.2.1-amd64-static /usr/local/ffmpeg
